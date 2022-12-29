@@ -1,0 +1,22 @@
+name: deployment
+on: push
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get source
+        uses: actions/checkout@v3
+      - name: install dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+      - name: Test code base
+        run: npm run test
+      - name: Run linter
+        run: npm run lint
+      - name: Build Code 
+        run: npm run build
+      - name: Deploy App
+        run: | 
+          echo "Deploying...."
+          echo "{{ github.event }}"
